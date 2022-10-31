@@ -10,7 +10,7 @@ export default function Layout(pageProps) {
         <link rel="icon" href="/favicon.ico" />
         <style>
           @import
-          url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,800&display=swap"');
+          url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,800&display=swap');
         </style>
       </Head>
       <div className="App">

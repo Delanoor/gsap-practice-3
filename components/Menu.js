@@ -1,12 +1,147 @@
 import Link from "next/link";
 import React from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
-function Menu() {
+import image1 from "../public/images/gsap02_1.jpg";
+import image2 from "../public/images/gsap02_2.jpg";
+import image3 from "../public/images/gsap02_3.jpg";
+import image4 from "../public/images/gsap02_4.jpg";
+import image5 from "../public/images/gsap02_5.jpg";
+
+const albums = [
+  { name: "Chicago", image: image1 },
+  { name: "NY", image: image2 },
+  { name: "Seoul", image: image3 },
+  { name: "Album4", image: image4 },
+  { name: "Album5", image: image5 },
+];
+
+function Menu({ state }) {
+  // vars for dom nodes
+  let menu = useRef(null);
+  let revealMenu = useRef(null);
+  let revealMenuBackground = useRef(null);
+  let imageBackground = useRef(null);
+  let line1 = useRef(null);
+  let line2 = useRef(null);
+  let line3 = useRef(null);
+  let info = useRef(null);
+
+  useEffect(() => {
+    if (state.clicked === false) {
+      // close menu
+
+      // most inner bg layer first
+      gsap.to([revealMenu, revealMenuBackground], {
+        duration: 0.8,
+        height: 0,
+        ease: "power3.inOut",
+        stagger: {
+          amount: 0.07,
+        },
+      });
+      gsap.to(menu, {
+        duration: 1,
+        css: {
+          display: "none",
+        },
+      });
+    } else if (
+      state.clicked === true ||
+      (state.clicked === true && state.initial === null)
+    ) {
+      // open menu
+      gsap.to(menu, {
+        duration: 0,
+        css: {
+          display: "block",
+        },
+      });
+      gsap.to([revealMenuBackground, revealMenu], {
+        duration: 0,
+        opacity: 1,
+        height: "100%",
+      });
+      staggerReveal([revealMenuBackground, revealMenu]);
+      fadeInUp(info);
+      staggerText([line1, line2, line3]);
+    }
+  }, [state]);
+
+  const staggerReveal = (node1, node2) => {
+    gsap.from([node1, node2], {
+      duration: 0.8,
+      height: 0,
+      transformOrigin: "right top",
+      skewY: 2,
+      ease: "power3.inOut",
+      stagger: {
+        amount: 0.1,
+      },
+    });
+  };
+  const staggerText = (node1, node2, node3) => {
+    gsap.from([node1, node2, node3], {
+      duration: 0.8,
+      y: 100,
+      delay: 0.1,
+      ease: "power3.inOut",
+      stagger: {
+        amount: 0.3,
+      },
+    });
+  };
+  const fadeInUp = (node) => {
+    gsap.from(node, {
+      y: 60,
+      duration: 1,
+      delay: 0.2,
+      opacity: 0,
+      ease: "power3.inOut",
+    });
+  };
+
+  const handleAlbum = (albumImage, target) => {
+    gsap.to(target, {
+      duration: 0,
+      background: `url(${albumImage.src}) center center`,
+    });
+    gsap.to(target, {
+      duration: 0.4,
+      opacity: 1,
+      ease: "power3.inOut",
+    });
+    gsap.from(target, {
+      duration: 0.4,
+      transformOrigin: "right top",
+    });
+  };
+
+  const handleAlbumReturn = (target) => {
+    gsap.to(target, {
+      duration: 0.4,
+      opacity: 0,
+    });
+  };
+
   return (
-    <div className="hamburger-menu z-[9] top-0 left-0 right-0 bottom-0 fixed h-full w-full">
-      <div className="menu-secondary-background-color top-0 left-0 right-0 bottom-0 fixed h-full w-full bg-[#121212] z-[-1]"></div>
-      <div className="menu-layer relative bg-[#e20001] h-full overflow-hidden">
-        <div className="menu-photo-background top-0 left-0 right-0 bottom-0 absolute h-full w-full opacity-0"></div>
+    <div
+      ref={(el) => (menu = el)}
+      className="hamburger-menu z-[9] top-0 left-0 right-0 bottom-0 fixed h-full w-full hidden"
+    >
+      <div
+        ref={(el) => (revealMenuBackground = el)}
+        className="menu-secondary-background-color top-0 left-0 right-0 bottom-0 fixed h-full w-full bg-[#121212] z-[-1]"
+      ></div>
+      <div
+        ref={(el) => (revealMenu = el)}
+        className="menu-layer relative bg-[#e20001] h-full overflow-hidden"
+      >
+        <div
+          ref={(el) => (imageBackground = el)}
+          className="menu-photo-background bg-no-repeat bg-cover top-0 left-0 right-0 bottom-0 absolute h-full w-full opacity-0"
+        ></div>
         <div className="container">
           <div className="wrapper relative">
             <div className="menu-links flex justify-between items-center relative top-[200px]">
@@ -14,6 +149,7 @@ function Menu() {
                 <ul className="p-0 m-0">
                   <li className="text-[6rem] font-[700] h-[135px] w-[700px] relative overflow-hidden">
                     <Link
+                      ref={(el) => (line1 = el)}
                       className="absolute text-white hover:text-black"
                       href={"/second"}
                     >
@@ -22,6 +158,7 @@ function Menu() {
                   </li>
                   <li className="text-[6rem] font-[700] h-[135px] w-[700px] relative overflow-hidden">
                     <Link
+                      ref={(el) => (line2 = el)}
                       className="absolute text-white hover:text-black"
                       href={"/third"}
                     >
@@ -30,6 +167,7 @@ function Menu() {
                   </li>
                   <li className="text-[6rem] font-[700] h-[135px] w-[700px] relative overflow-hidden">
                     <Link
+                      ref={(el) => (line3 = el)}
                       className="absolute text-white hover:text-black"
                       href={"/fourth"}
                     >
@@ -38,7 +176,10 @@ function Menu() {
                   </li>
                 </ul>
               </nav>
-              <div className="info text-white w-[300px]">
+              <div
+                ref={(el) => (info = el)}
+                className="info text-white w-[300px]"
+              >
                 <h3 className="text-[1.2rem] my-[8px]">Our Promise</h3>
                 <p className="mx-auto text-[0.8rem]">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
@@ -47,22 +188,17 @@ function Menu() {
                 </p>
               </div>
               <div className="locations absolute bottom-[-80px] text-white mt-4 text-[0.8rem] font-[600]">
-                Recent:
-                <span className="font-[400] cursor-pointer mx-8 duration-300 ease-in-out first:left-16 py-2 px-6 rounded-[4px] hover:bg-black">
-                  Album 1
-                </span>
-                <span className="font-[400] cursor-pointer mx-8 duration-300 ease-in-out hover:py-2 hover:px-6 hover:rounded-[4px] hover:bg-black">
-                  Album 2
-                </span>
-                <span className="font-[400] cursor-pointer mx-8 duration-300 ease-in-out hover:py-2 hover:px-6 hover:rounded-[4px] hover:bg-black">
-                  Album 3
-                </span>
-                <span className="font-[400] cursor-pointer mx-8 duration-300 ease-in-out hover:py-2 hover:px-6 hover:rounded-[4px] hover:bg-black">
-                  Album 4
-                </span>
-                <span className="font-[400] cursor-pointer mx-8 duration-300 ease-in-out hover:py-2 hover:px-6 hover:rounded-[4px] hover:bg-black">
-                  Album 5
-                </span>
+                Recent Albums:
+                {albums.map((el) => (
+                  <span
+                    key={el.name}
+                    className="font-[400] cursor-pointer first:ml-16 mx-8 duration-300 ease-in-out left-16 hover:py-2 hover:px-6 rounded-[4px] hover:bg-black"
+                    onMouseEnter={() => handleAlbum(el.image, imageBackground)}
+                    onMouseLeave={() => handleAlbumReturn(imageBackground)}
+                  >
+                    {el.name}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
