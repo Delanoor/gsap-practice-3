@@ -125,6 +125,24 @@ function Menu({ state }) {
     });
   };
 
+  const handleMenuHover = (e) => {
+    gsap.to(e.target, {
+      duration: 0.3,
+      y: 3,
+      skewX: 4,
+      ease: "power3.inOut",
+    });
+  };
+
+  const handleMenuHoverExit = (e) => {
+    gsap.to(e.target, {
+      duration: 0.3,
+      y: -3,
+      skewX: 0,
+      ease: "power3.inOut",
+    });
+  };
+
   return (
     <div
       ref={(el) => (menu = el)}
@@ -140,7 +158,7 @@ function Menu({ state }) {
       >
         <div
           ref={(el) => (imageBackground = el)}
-          className="menu-photo-background bg-no-repeat bg-cover top-0 left-0 right-0 bottom-0 absolute h-full w-full opacity-0"
+          className="menu-photo-background animate-cameraPan bg-no-repeat bg-cover top-0 left-0 right-0 bottom-0 absolute h-full w-full opacity-0"
         ></div>
         <div className="mx-auto w-full h-full max-w-[1280px]">
           <div className="md:px-[48px] relative">
@@ -150,6 +168,8 @@ function Menu({ state }) {
                   <li className="text-[6rem] font-[700] h-[135px] max-w-[400px] relative overflow-hidden">
                     <Link
                       ref={(el) => (line1 = el)}
+                      onMouseEnter={(e) => handleMenuHover(e)}
+                      onMouseOut={(e) => handleMenuHoverExit(e)}
                       className="absolute text-white hover:text-black"
                       href={"/second"}
                     >
@@ -159,6 +179,8 @@ function Menu({ state }) {
                   <li className="text-[6rem] font-[700] h-[135px] w-[700px] relative overflow-hidden">
                     <Link
                       ref={(el) => (line2 = el)}
+                      onMouseEnter={(e) => handleMenuHover(e)}
+                      onMouseOut={(e) => handleMenuHoverExit(e)}
                       className="absolute text-white hover:text-black"
                       href={"/third"}
                     >
@@ -168,6 +190,8 @@ function Menu({ state }) {
                   <li className="text-[6rem] font-[700] h-[135px] w-[700px] relative overflow-hidden">
                     <Link
                       ref={(el) => (line3 = el)}
+                      onMouseEnter={(e) => handleMenuHover(e)}
+                      onMouseOut={(e) => handleMenuHoverExit(e)}
                       className="absolute text-white hover:text-black"
                       href={"/fourth"}
                     >
