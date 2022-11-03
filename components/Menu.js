@@ -142,12 +142,12 @@ function Menu({ state }) {
           ref={(el) => (imageBackground = el)}
           className="menu-photo-background bg-no-repeat bg-cover top-0 left-0 right-0 bottom-0 absolute h-full w-full opacity-0"
         ></div>
-        <div className="container">
-          <div className="wrapper relative">
-            <div className="menu-links flex justify-between items-center relative top-[200px]">
-              <nav className="block">
+        <div className="mx-auto w-full h-full max-w-[1280px]">
+          <div className="md:px-[48px] relative">
+            <div className="menu-links flex flex-col md:flex-row justify-between items-center relative top-[200px]">
+              <nav className="block w-full">
                 <ul className="p-0 m-0">
-                  <li className="text-[6rem] font-[700] h-[135px] w-[700px] relative overflow-hidden">
+                  <li className="text-[6rem] font-[700] h-[135px] max-w-[400px] relative overflow-hidden">
                     <Link
                       ref={(el) => (line1 = el)}
                       className="absolute text-white hover:text-black"
@@ -176,11 +176,12 @@ function Menu({ state }) {
                   </li>
                 </ul>
               </nav>
-              <div
+              {/* <div
                 ref={(el) => (info = el)}
-                className="info text-white w-[300px]"
-              >
-                <h3 className="text-[1.2rem] my-[8px]">Our Promise</h3>
+                className="info text-white border w-[300px]"
+              > */}
+              <div ref={(el) => (info = el)} className="info text-white w-full">
+                <h3 className="text-[1.2rem] my-[8px]">Join Us with</h3>
                 <p className="mx-auto text-[0.8rem]">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
                   sed nam illum repellat ab consequuntur quo veniam inventore

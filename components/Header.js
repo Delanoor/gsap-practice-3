@@ -60,21 +60,43 @@ export default function Header() {
 
   return (
     <header className="h-[100px]">
-      <div className="container">
-        <div className="wrapper">
+      <div className="w-full max-w-[1280px] mx-auto">
+        <div className="px-12">
           <div className="inner-header relative z-10 h-[100px] flex justify-between items-center">
             <div className="logo font-[700] text-[#191919]">
-              <Link className="text-[1rem]" href={"/"}>
-                Delanoor
+              <Link className="text-[1.7rem]" href={"/"}>
+                JS
               </Link>
             </div>
             <div className="menu">
               <button
-                className="bg-none text-[0.9rem] text-[#191919]"
+                className={`${
+                  state.clicked ? "text-[#fff]" : "text-[#191919]"
+                } hidden md:block bg-none text-[1.1rem] `}
                 disabled={disabled}
                 onClick={handleMenu}
               >
-                Menu
+                {state.menuName}
+              </button>
+              <button
+                className="md:hidden "
+                disabled={disabled}
+                onClick={handleMenu}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  // stroke="currentColor"
+                  className="w-8 h-8 stroke-black"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
               </button>
             </div>
           </div>
