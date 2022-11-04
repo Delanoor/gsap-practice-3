@@ -3,6 +3,18 @@ import React from "react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
+import {
+  staggerReveal,
+  staggerText,
+  fadeInUp,
+  handleAlbum,
+  handleAlbumReturn,
+  handleMenuHover,
+  handleMenuHoverExit,
+  flatten,
+  staggerTextUp,
+} from "./Animations";
+
 import image1 from "../public/images/gsap02_1.jpg";
 import image2 from "../public/images/gsap02_2.jpg";
 import image3 from "../public/images/gsap02_3.jpg";
@@ -23,16 +35,20 @@ function Menu({ state }) {
   let revealMenu = useRef(null);
   let revealMenuBackground = useRef(null);
   let imageBackground = useRef(null);
+  let lines = useRef(null);
   let line1 = useRef(null);
   let line2 = useRef(null);
   let line3 = useRef(null);
   let info = useRef(null);
+
+  const tl = useRef();
 
   useEffect(() => {
     if (state.clicked === false) {
       // close menu
 
       // most inner bg layer first
+
       gsap.to([revealMenu, revealMenuBackground], {
         duration: 0.8,
         height: 0,
@@ -41,6 +57,7 @@ function Menu({ state }) {
           amount: 0.07,
         },
       });
+
       gsap.to(menu, {
         duration: 1,
         css: {
@@ -64,84 +81,11 @@ function Menu({ state }) {
         height: "100%",
       });
       staggerReveal([revealMenuBackground, revealMenu]);
+
       fadeInUp(info);
       staggerText([line1, line2, line3]);
     }
   }, [state]);
-
-  const staggerReveal = (node1, node2) => {
-    gsap.from([node1, node2], {
-      duration: 0.8,
-      height: 0,
-      transformOrigin: "right top",
-      skewY: 2,
-      ease: "power3.inOut",
-      stagger: {
-        amount: 0.1,
-      },
-    });
-  };
-  const staggerText = (node1, node2, node3) => {
-    gsap.from([node1, node2, node3], {
-      duration: 0.8,
-      y: 100,
-      delay: 0.1,
-      ease: "power3.inOut",
-      stagger: {
-        amount: 0.3,
-      },
-    });
-  };
-  const fadeInUp = (node) => {
-    gsap.from(node, {
-      y: 60,
-      duration: 1,
-      delay: 0.2,
-      opacity: 0,
-      ease: "power3.inOut",
-    });
-  };
-
-  const handleAlbum = (albumImage, target) => {
-    gsap.to(target, {
-      duration: 0,
-      background: `url(${albumImage.src}) center center`,
-    });
-    gsap.to(target, {
-      duration: 0.4,
-      opacity: 1,
-      ease: "power3.inOut",
-    });
-    gsap.from(target, {
-      duration: 0.4,
-      transformOrigin: "right top",
-    });
-  };
-
-  const handleAlbumReturn = (target) => {
-    gsap.to(target, {
-      duration: 0.4,
-      opacity: 0,
-    });
-  };
-
-  const handleMenuHover = (e) => {
-    gsap.to(e.target, {
-      duration: 0.3,
-      y: 3,
-      skewX: 4,
-      ease: "power3.inOut",
-    });
-  };
-
-  const handleMenuHoverExit = (e) => {
-    gsap.to(e.target, {
-      duration: 0.3,
-      y: -3,
-      skewX: 0,
-      ease: "power3.inOut",
-    });
-  };
 
   return (
     <div
@@ -151,7 +95,7 @@ function Menu({ state }) {
       <div
         ref={(el) => (revealMenuBackground = el)}
         className="menu-secondary-background-color top-0 left-0 right-0 bottom-0 fixed h-full w-full bg-[#121212] z-[-1]"
-      ></div>
+      />
       <div
         ref={(el) => (revealMenu = el)}
         className="menu-layer relative bg-[#e20001] h-full overflow-hidden"
@@ -164,7 +108,7 @@ function Menu({ state }) {
           <div className="md:px-[48px] relative">
             <div className="menu-links flex flex-col md:flex-row justify-between items-center relative top-[200px]">
               <nav className="block w-full">
-                <ul className="p-0 m-0">
+                <ul ref={(el) => (lines = el)} className="p-0 m-0">
                   <li className="text-[6rem] font-[700] h-[135px] max-w-[400px] relative overflow-hidden">
                     <Link
                       ref={(el) => (line1 = el)}

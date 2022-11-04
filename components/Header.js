@@ -89,7 +89,9 @@ export default function Header() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   // stroke="currentColor"
-                  className="w-8 h-8 stroke-black"
+                  className={`${
+                    state.clicked ? "stroke-[#fff]" : "stroke-[#191919]"
+                  } w-8 h-8`}
                 >
                   <path
                     strokeLinecap="round"
