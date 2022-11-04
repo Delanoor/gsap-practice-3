@@ -5,18 +5,12 @@ export const staggerReveal = (node1, node2) => {
   gsap.from([node1, node2], {
     height: "0%",
 
-    // duration: 0.8,
-    // duration: 1.45,
-    // borderRadius: "50%",
-    // width: "150%",
-    // height: "150%",
-    // top: "-150%",
-    // left: "-25%",
-    // height: "0%",
+    duration: 0.8,
+
     // transformOrigin: "right top",
     // transformOrigin: "top top",
     // skew: 2,
-    // ease: "power3.inOut",
+    ease: "power3.inOut",
     stagger: {
       amount: 0.1,
     },
@@ -45,7 +39,7 @@ export const staggerText = (node1, node2, node3) => {
   gsap.from([node1, node2, node3], {
     duration: 0.8,
     y: "100%",
-    delay: 0.5,
+    delay: 0.2,
     ease: "power3.inOut",
     stagger: {
       amount: 0.3,
