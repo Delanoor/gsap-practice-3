@@ -15,11 +15,7 @@ export default function Layout(pageProps) {
       </Head>
       <div className="App">
         <Header />
-        <div className="container">
-          <div className="wrapper">
-            <div className="home">{pageProps.children}</div>
-          </div>
-        </div>
+        <div className="home">{pageProps.children}</div>
       </div>
     </>
   );

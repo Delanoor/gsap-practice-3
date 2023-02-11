@@ -68,6 +68,11 @@ export default function Header() {
                 JS
               </Link>
             </div>
+            <div>
+              <button>
+                <Link href="/second">TWO</Link>
+              </button>
+            </div>
             <div className="menu">
               <button
                 className={`${
