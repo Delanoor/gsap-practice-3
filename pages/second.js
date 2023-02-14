@@ -18,10 +18,11 @@ export default function second() {
   }, []);
   return (
     <>
-      <div className="w-full h-full" ref={page}>
-        <div className="h-screen flex flex-col relative items-center px-10">
-          <div className="mt-[10rem] relative">
-            <div className="relative overflow-hidden h-full w-full">
+      <div className="w-full min-h-screen bg-[#e0e5eb]" ref={page}>
+        <div className="h-full flex flex-col items-center px-10 border">
+          <div className="mt-[5rem] h-full py-10">
+            {/* title */}
+            <div className="relative overflow-hidden w-full h-[4rem]">
               <div data-animate="up" className="text-[3rem] absolute">
                 PAGE TWO
               </div>
@@ -36,6 +37,19 @@ export default function second() {
                 exercitationem. Tempore est eum doloremque sunt rerum explicabo?
               </p>
             </div>
+          </div>
+          {/* neumorphism */}
+          <div className="relative mt-10 h-[1rem]">
+            <div
+              className="border h-[10rem] w-[10rem] 
+            rounded-[1rem] bg-[#e0e5eb] 
+            shadow-[1rem_1rem_1.8rem_#bcbcbc,-1rem_-1rem_1.8rem_#ffffff]"
+            />
+            <div
+              className="mt-[3rem] border h-[200px] w-[200px] 
+            rounded-[1rem]
+            neumorphism"
+            />
           </div>
         </div>
       </div>

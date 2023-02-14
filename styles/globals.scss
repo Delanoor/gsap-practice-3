@@ -8,10 +8,22 @@
 // body {
 //   font-size: 1.6rem;
 // }
+$background: #e0e5eb;
 html,
 body {
   padding: 0;
   margin: 0;
+}
+
+// for webkit-based browsers (Chrome, Safari, Opera)
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+// for IE, Edge, Firefox
+.scrollbar-hide {
+  -ms-overflow-style: none; // IE, Edge
+  scrollbar-width: none; // Firefox
 }
 
 .container {
@@ -41,4 +53,10 @@ body {
       }
     }
   }
+}
+
+.neumorphism {
+  background: $background;
+  box-shadow: 0.2em 0.2em calc(0.2em * 2) rgb(163, 177, 198, 0.6),
+    calc(0.2em * -1) calc(0.2em * -1) calc(0.2em * 2) #ffffff;
 }
