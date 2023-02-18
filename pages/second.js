@@ -41,9 +41,12 @@ export default function second() {
           {/* neumorphism */}
           <div className="relative mt-10 h-[1rem]">
             <div
-              className="border h-[10rem] w-[10rem] 
-            rounded-[1rem] bg-[#e0e5eb] 
-            shadow-[1rem_1rem_1.8rem_#bcbcbc,-1rem_-1rem_1.8rem_#ffffff]"
+              className="border h-[20rem] w-[20rem] 
+            rounded-[1rem] 
+            shadow-[0.3rem_0.3rem_0.6rem_rgba(163,177,198,0.6),-0.3rem_-0.3rem_0.6rem_#ffffff]
+            hover:shadow-[inset_0.3rem_0.3rem_0.6rem_rgba(163,177,198,0.6),inset_-0.3rem_-0.3rem_0.6rem_#ffffff]
+            transition-shadow duration-700 ease-in-out
+            "
             />
             <div
               className="mt-[3rem] border h-[200px] w-[200px] 
