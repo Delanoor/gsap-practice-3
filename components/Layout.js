@@ -13,7 +13,7 @@ export default function Layout(pageProps) {
           url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,800&display=swap');
         </style>
       </Head>
-      <div className="App">
+      <div className="App h-screen max-h-screen overflow-hidden">
         <Header />
         <div className="home">{pageProps.children}</div>
       </div>

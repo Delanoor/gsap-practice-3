@@ -1,8 +1,4 @@
-import {
-  CSSTransition,
-  SwitchTransition,
-  Transition,
-} from "react-transition-group";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 import Layout from "../components/Layout";
 import "../styles/globals.scss";
 import { useRouter } from "next/router";
